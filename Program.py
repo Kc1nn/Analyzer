@@ -1,21 +1,27 @@
 import customtkinter
 
-customtkinter.set_appearance_mode("Dark")  # Режим теми: System, Dark, Light
-customtkinter.set_default_color_theme("green")  # Колірна схема: blue, green, dark-blue
+customtkinter.set_appearance_mode("Dark")
+customtkinter.set_default_color_theme("green")
 
 app = customtkinter.CTk()
-app.geometry("400x200")  # Розміри вікна
-app.title("Hello, World! з CustomTkinter")
+app.geometry("600x400")
+app.title("Аналізатор тексту")
 
-def button_callback():
-    label.configure(text="Кнопку натиснуто!")
+def analyze_text():
+    text = textbox.get("1.0", "end-1c") # Отримуємо текст з textbox
+    # Тут ваш код аналізу тексту (поки що просто виводимо текст)
+    result_label.configure(text=f"Введено текст: {text}")
 
-# Створення напису (Label)
-label = customtkinter.CTkLabel(app, text="Hello, World!", font=customtkinter.CTkFont(size=20, weight="bold"))
-label.pack(pady=(20, 0))  # Верхній відступ 20, нижній 0
+# Текстове поле
+textbox = customtkinter.CTkTextbox(app)
+textbox.pack(padx=20, pady=(20, 10))
 
-# Створення кнопки
-button = customtkinter.CTkButton(app, text="Натисни мене!", command=button_callback)
-button.pack(pady=(20, 20))  # Верхній та нижній відступи по 20
+# Кнопка аналізу
+analyze_button = customtkinter.CTkButton(app, text="Аналізувати", command=analyze_text)
+analyze_button.pack(pady=(0, 10))
+
+# Мітка для результатів
+result_label = customtkinter.CTkLabel(app, text="")
+result_label.pack()
 
 app.mainloop()
